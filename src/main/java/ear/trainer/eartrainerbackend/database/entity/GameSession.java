@@ -3,7 +3,6 @@ package ear.trainer.eartrainerbackend.database.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.catalina.User;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
@@ -12,15 +11,15 @@ import java.sql.Timestamp;
 @Setter
 @Entity
 @Table(name = "game_sessions")
-public class GameSessionEntity {
+public class GameSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_entity_id")
-    private UserEntity userEntity;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private int mode; // 0 = single note, 1 = simple chords 2 = add sus chords and 7ths -- this functions as the difficulty
 

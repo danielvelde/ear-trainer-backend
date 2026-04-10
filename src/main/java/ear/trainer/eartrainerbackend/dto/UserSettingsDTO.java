@@ -1,5 +1,5 @@
 package ear.trainer.eartrainerbackend.dto;
 
-public class UserSettingsDto {
+public class UserSettingsDTO {
     // TODO
 }
