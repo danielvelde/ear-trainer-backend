@@ -1,4 +1,6 @@
 package ear.trainer.eartrainerbackend.database.repository;
 
-public interface GameSessionRepository {
+import ear.trainer.eartrainerbackend.database.entity.GameSessionEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+public interface GameSessionRepository extends JpaRepository<GameSessionEntity, Long> {
 }
