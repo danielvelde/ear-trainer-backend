@@ -14,8 +14,14 @@ public class GameSessionMapper {
         return dto;
     }
 
-    public GameSession toEntity(GameSessionDTO gameSessionDTO){
-        // TODO
-        return new GameSession();
+    public GameSession toEntity(GameSessionDTO dto){
+       GameSession gameSession = new GameSession();
+        gameSession.setId(dto.getId());
+        gameSession.setMode(dto.getMode());
+        gameSession.setScore(dto.getScore());
+        gameSession.setAccuracy(dto.getAccuracy());
+        gameSession.setAverageTimeInMs(dto.getAverageTimeInMs());
+        gameSession.setCreatedAt(dto.getCreatedAt());
+        return gameSession;
     }
 }
