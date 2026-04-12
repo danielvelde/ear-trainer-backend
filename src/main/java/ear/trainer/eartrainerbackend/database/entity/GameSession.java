@@ -34,6 +34,8 @@ public class GameSession {
 
     private int answeredCorrectSecondTime;
 
+
+
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private Timestamp createdAt;
