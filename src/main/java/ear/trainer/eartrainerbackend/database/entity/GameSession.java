@@ -23,6 +23,7 @@ public class GameSession {
 
     private int mode; // 0 = single note, 1 = simple chords 2 = add sus chords and 7ths -- this functions as the difficulty
 
+
     private int score; // 100 = max
 
     private int accuracy; // 0 to 100 percent

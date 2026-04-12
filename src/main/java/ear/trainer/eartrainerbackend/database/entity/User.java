@@ -24,6 +24,8 @@ public class User {
 
     private String email;
 
+    private int defaultDifficulty; // 0 = single notes, 1 = simple chords
+
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private Timestamp createdAt;
