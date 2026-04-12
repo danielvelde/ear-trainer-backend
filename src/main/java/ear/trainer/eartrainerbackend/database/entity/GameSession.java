@@ -1,11 +1,13 @@
 package ear.trainer.eartrainerbackend.database.entity;
 
+import ear.trainer.eartrainerbackend.service.generator.Sound;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 @Getter
 @Setter
@@ -23,6 +25,7 @@ public class GameSession {
 
     private int mode; // 0 = single note, 1 = simple chords 2 = add sus chords and 7ths -- this functions as the difficulty
 
+    private ArrayList<Sound> sounds;
 
     private int score; // 100 = max
 
