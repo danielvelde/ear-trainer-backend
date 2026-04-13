@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 public class GameSessionDTO {
     private Long id;
     private int mode;
+    private int amountOfQuestions;
     private int score;
     private int accuracy;
     private int averageTimeInMs;
