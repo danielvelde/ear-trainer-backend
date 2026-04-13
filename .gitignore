@@ -1,3 +1,4 @@
 # Ignore output folder
 /target/
 HELP.md
+.env
