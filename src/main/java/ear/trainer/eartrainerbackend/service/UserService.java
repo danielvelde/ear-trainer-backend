@@ -2,7 +2,9 @@ package ear.trainer.eartrainerbackend.service;
 
 import ear.trainer.eartrainerbackend.database.entity.User;
 import ear.trainer.eartrainerbackend.database.repository.UserRepository;
+import ear.trainer.eartrainerbackend.dto.RegisterRequestDto;
 import ear.trainer.eartrainerbackend.dto.UserDto;
+import ear.trainer.eartrainerbackend.dto.UserResponseDto;
 import ear.trainer.eartrainerbackend.exception.UserAlreadyExistsException;
 import ear.trainer.eartrainerbackend.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public UserDto createUser(UserDto dto) {
+    public UserResponseDto createUser(RegisterRequestDto dto) {
         if(userRepository.findByEmail(dto.getEmail()).isPresent()){
             throw new UserAlreadyExistsException(dto.getEmail());
         }
