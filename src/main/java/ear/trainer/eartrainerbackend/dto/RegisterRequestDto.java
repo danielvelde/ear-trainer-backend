@@ -1,5 +1,7 @@
 package ear.trainer.eartrainerbackend.dto;
 
 public class RegisterRequestDto {
-    // TODO
+    private String email;
+    private String password;
+    private String name;
 }
