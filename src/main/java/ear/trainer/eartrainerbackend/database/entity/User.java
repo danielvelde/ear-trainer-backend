@@ -28,5 +28,6 @@ public class User {
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
+
     private Timestamp createdAt;
 }
