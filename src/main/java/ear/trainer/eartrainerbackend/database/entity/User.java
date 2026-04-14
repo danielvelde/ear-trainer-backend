@@ -24,6 +24,8 @@ public class User {
     @Email
     private String email;
 
+    private String passwordHash;
+
     private int defaultDifficulty; // 0 = single notes, 1 = simple chords
 
     @Column(nullable = false, updatable = false)
