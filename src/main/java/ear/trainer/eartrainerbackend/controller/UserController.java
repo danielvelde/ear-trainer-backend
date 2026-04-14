@@ -23,8 +23,9 @@ public class UserController {
         UserDTO saved = userService.createUser(dto);
         return ResponseEntity.ok(saved);
     }
-    @GetMapping("/users/$id")
-    public UserDTO getUser(UUID id){
-    // TODO
+    @GetMapping("/users/{id}")
+    public ResponseEntity<UserDTO> getUser(UUID id){
+        UserDTO user = userService.getUser(id);
+        return ResponseEntity.ok(user);
     }
 }

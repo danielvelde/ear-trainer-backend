@@ -2,11 +2,13 @@ package ear.trainer.eartrainerbackend.mapper;
 
 import ear.trainer.eartrainerbackend.database.entity.User;
 import ear.trainer.eartrainerbackend.dto.UserDTO;
+import org.aspectj.lang.annotation.control.CodeGenerationHint;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserMapper {
     public User toEntity(UserDTO dto){
         User ent = new User();
-        ent.setId(dto.getId());
         ent.setName(dto.getName());
         ent.setEmail(dto.getEmail());
         ent.setCreatedAt(dto.getCreatedAt());
@@ -17,6 +19,7 @@ public class UserMapper {
         UserDTO dto = new UserDTO();
         dto.setId(ent.getId());
         dto.setName(ent.getName());
+        dto.setEmail(ent.getEmail());
         return dto;
     }
 }

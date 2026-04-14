@@ -19,7 +19,7 @@ public class GameSessionService {
         gameSession.setUser(user);
         gameSession.setMode(gameSessionDTO.getMode());
         gameSession.setAmountOfQuestions(gameSessionDTO.getAmountOfQuestions());
-
+        return gameSession;
     }
 
 }

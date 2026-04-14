@@ -2,7 +2,9 @@ package ear.trainer.eartrainerbackend.mapper;
 
 import ear.trainer.eartrainerbackend.database.entity.GameSession;
 import ear.trainer.eartrainerbackend.dto.GameSessionDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GameSessionMapper {
     public GameSessionDTO toDTO(GameSession gameSession){
         GameSessionDTO dto = new GameSessionDTO();
