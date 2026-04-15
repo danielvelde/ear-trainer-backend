@@ -10,7 +10,7 @@ spring:
       idle-timeout: 120000
       leak-detection-threshold: 40001
       data-source-properties:
-        prepareThreshold: 0
+        preparethreshold: 0
 
   jpa:
     hibernate:
@@ -23,3 +23,6 @@ spring:
 
 server:
   port: 8080
+supabase:
+  url: ${SUPABASE_URL}
+  key: ${SUPABASE_KEY}

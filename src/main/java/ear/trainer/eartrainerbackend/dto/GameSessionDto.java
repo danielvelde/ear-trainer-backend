@@ -7,7 +7,7 @@ import lombok.Setter;
 import java.sql.Timestamp;
 @Getter
 @Setter
-public class GameSessionDTO {
+public class GameSessionDto {
     private Long id;
     private int mode;
     private int amountOfQuestions;

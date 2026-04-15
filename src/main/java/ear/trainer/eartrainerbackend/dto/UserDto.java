@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 @Setter
 @Getter
-public class UserDTO {
+public class UserDto {
     private UUID id;
     private String name;
     private String email;
