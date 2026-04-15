@@ -2,15 +2,15 @@ spring:
   datasource:
     url: jdbc:postgresql://aws-0-eu-west-1.pooler.supabase.com:6543/postgres?sslmode=require
     username: postgres.msxpzgqxtxqyhgqjajfs
-    password: ${DB_PASSWORD}
-    driver-class-name: org.postgresql.Driver
+    password: ${db_password}
+    driver-class-name: org.postgresql.driver
     hikari:
       maximum-pool-size: 10
       minimum-idle: 2
       idle-timeout: 120000
       leak-detection-threshold: 40001
       data-source-properties:
-        prepareThreshold: 0
+        preparethreshold: 0
 
   jpa:
     hibernate:
@@ -18,8 +18,11 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.postgresqldialect
         format_sql: true
 
 server:
   port: 8080
+supabase:
+  url: https://msxpzgqxtxqyhgqjajfs.supabase.co
+  key: sb_publishable_5rYKtbX6SrDqAGO2fxADOQ_vq0zAZkF

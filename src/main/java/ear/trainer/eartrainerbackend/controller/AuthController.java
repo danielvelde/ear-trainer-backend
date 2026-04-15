@@ -1,5 +1,6 @@
 package ear.trainer.eartrainerbackend.controller;
 
+import ear.trainer.eartrainerbackend.database.repository.UserRepository;
 import ear.trainer.eartrainerbackend.dto.AuthResponseDto;
 import ear.trainer.eartrainerbackend.dto.LoginRequestDto;
 import ear.trainer.eartrainerbackend.dto.RegisterRequestDto;
@@ -20,13 +21,13 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponseDto> register(@RequestBody RegisterRequestDto dto){
-        return ResponseEntity.ok(authService.register(dto));
+        return ResponseEntity.status(201).body(authService.register(dto));
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginRequestDto dto){
-
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginRequestDto dto){
+//        // TODO
+//    }
 
 
 }
