@@ -8,11 +8,16 @@ import org.springframework.context.annotation.Configuration;
 public class FilterConfig {
 
     @Bean
-    public FilterRegistrationBean<JwtFilter> jwtFilter(JwtFilter jwtFilter) {
+    public JwtFilter jwtFilter() {
+        return new JwtFilter();
+    }
+
+    @Bean
+    public FilterRegistrationBean<JwtFilter> jwtFilterRegistration(JwtFilter jwtFilter) {
         FilterRegistrationBean<JwtFilter> registration = new FilterRegistrationBean<>();
 
         registration.setFilter(jwtFilter);
-        registration.addUrlPatterns("/api/*"); // apply to your API
+        registration.addUrlPatterns("/api/*");
         registration.setOrder(1);
 
         return registration;
