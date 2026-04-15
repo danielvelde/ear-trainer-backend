@@ -24,10 +24,10 @@ public class AuthController {
         return ResponseEntity.status(201).body(authService.register(dto));
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginRequestDto dto){
-//        // TODO
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginRequestDto dto){
+        return ResponseEntity.ok(authService.login(dto));
+    }
 
 
 }
