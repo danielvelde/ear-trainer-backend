@@ -24,5 +24,5 @@ spring:
 server:
   port: 8080
 supabase:
-  url: https://msxpzgqxtxqyhgqjajfs.supabase.co
-  key: sb_publishable_5rYKtbX6SrDqAGO2fxADOQ_vq0zAZkF
+  url: ${supabase_url}
+  key: ${supabase.key}
