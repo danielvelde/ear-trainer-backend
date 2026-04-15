@@ -31,7 +31,7 @@ public class SupabaseAuthClient {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("apikey", apiKey);
-        headers.set("Authorization", "Bearer" + apiKey);
+        headers.set("Authorization", "Bearer " + apiKey);
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         Map<String, String> body = new HashMap<>();

@@ -16,11 +16,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping()
-    public ResponseEntity<UserDto> register(@RequestBody UserDto dto){
-        UserDto saved = userService.createUser(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
-    }
+//    @PostMapping()
+//    public ResponseEntity<UserDto> register(@RequestBody UserDto dto){
+//        UserDto saved = userService.createUser(dto);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+//    }
 
     // TODO -- POST login function
 

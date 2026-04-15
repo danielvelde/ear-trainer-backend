@@ -20,14 +20,14 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public UserResponseDto createUser(RegisterRequestDto dto) {
-        if(userRepository.findByEmail(dto.getEmail()).isPresent()){
-            throw new UserAlreadyExistsException(dto.getEmail());
-        }
-        User user = userMapper.toEntity(dto);
-        User userCreated = userRepository.save(user);
-        return userMapper.toDTO(userCreated);
-    }
+//    public UserResponseDto createUser(RegisterRequestDto dto) {
+//        if(userRepository.findByEmail(dto.getEmail()).isPresent()){
+//        throw new UserAlreadyExistsException(dto.getEmail());
+//        }
+//        User user = userMapper.toEntity(dto);
+//        User userCreated = userRepository.save(user);
+//        return userMapper.toDTO(userCreated);
+//    }
 
     public UserDto getUser(UUID id) {
         User user = userRepository.findById(id)
