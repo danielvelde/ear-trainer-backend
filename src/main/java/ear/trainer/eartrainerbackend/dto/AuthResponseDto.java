@@ -19,5 +19,7 @@ public class AuthResponseDto {
     @JsonProperty("expires_in")
     private Long expiresIn;
 
-    private UserResponseDto user;
+//    private UserResponseDto user;
+
+    private SupabaseUserDto user;
 }

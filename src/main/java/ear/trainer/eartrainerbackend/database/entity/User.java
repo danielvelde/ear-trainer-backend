@@ -16,7 +16,7 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(columnDefinition = "uuid")
     private UUID id;
 
     private String name;
@@ -24,12 +24,11 @@ public class User {
     @Email
     private String email;
 
-    private String passwordHash;
+//    private String passwordHash;
 
     private int defaultDifficulty; // 0 = single notes, 1 = simple chords
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
-
     private Timestamp createdAt;
 }
