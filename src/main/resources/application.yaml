@@ -27,3 +27,5 @@ supabase:
   url: ${SUPABASE_URL}
   key: ${SUPABASE_KEY}
   service-role-key: ${SUPABASE_SECRET_KEY}
+cors:
+  allowed-origins: "http://localhost:5173"
