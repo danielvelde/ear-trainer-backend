@@ -35,7 +35,15 @@ public class AuthService {
             user.setId(UUID.fromString(userId));
             user.setEmail(email);
 
-            userRepository.save(user);
+            try {
+                userRepository.save(user);
+            } catch (Exception e) {
+                // 1. Ruim Supabase op
+                supabaseAuthClient.undoRegister(userId);
+
+                // 2. Vertel de rest van de app dat het echt mislukt is
+                throw new RuntimeException("Database synchronisatie mislukt. Registratie is ongedaan gemaakt.", e);
+            }
 
             return response;
 

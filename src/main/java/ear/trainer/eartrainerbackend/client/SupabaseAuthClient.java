@@ -4,10 +4,7 @@ import ear.trainer.eartrainerbackend.dto.AuthResponseDto;
 import ear.trainer.eartrainerbackend.dto.LoginRequestDto;
 import ear.trainer.eartrainerbackend.dto.RegisterRequestDto;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,6 +21,9 @@ public class SupabaseAuthClient {
 
     @Value("${supabase.key}")
     private String apiKey;
+
+    @Value("${supabase.service-role-key}")
+    private String serviceRoleKey;
 
     public AuthResponseDto register(RegisterRequestDto dto) {
 
@@ -44,6 +44,23 @@ public class SupabaseAuthClient {
                 restTemplate.postForEntity(url, request, AuthResponseDto.class);
 
         return response.getBody();
+    }
+
+    public void undoRegister(String userId) {
+        // Let op de 'admin/users' in de URL
+        String url = supabaseUrl + "/auth/v1/admin/users/" + userId;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("apikey", serviceRoleKey);
+        headers.set("Authorization", "Bearer " + serviceRoleKey);
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+        try {
+            restTemplate.exchange(url, HttpMethod.DELETE, entity, Void.class);
+        } catch (Exception e) {
+            System.err.println("Rollback failed for user: " + userId);
+        }
     }
 
     public AuthResponseDto login(LoginRequestDto dto) {
