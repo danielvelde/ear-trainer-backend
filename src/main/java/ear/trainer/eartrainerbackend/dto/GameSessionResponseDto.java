@@ -12,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class GameSessionResponseDto {
-        private User user;
+        private Long id;
         private UUID userId;
         private int mode;
         private int amountOfQuestions;

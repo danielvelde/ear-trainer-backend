@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/game-session")
+@RequestMapping("/api/game")
 public class GameSessionController {
 
     @Autowired
     private GameSessionService gameSessionService;
 
 
-//
-//        @PostMapping
-//        public GameSessionResponseDto createGameSession(@RequestBody GameSessionRequestDto dto, Authentication authentication){
-////            return gameSessionService.createGameSession(authentication.getName(), dto);
-//
-//        }
+
+    @GetMapping("/session")
+    public ResponseEntity<GameSessionResponseDto> getSession(GameSessionRequestDto dto) {
+        return ResponseEntity.ok(gameSessionService.generateSession(dto));
+    }
+
 //    @PutMapping // I think this could be used for actually storing the score after the game is finished
 
 //    @DeleteMapping // Maybe for when person delet account
