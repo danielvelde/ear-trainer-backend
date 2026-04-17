@@ -3,6 +3,7 @@ package ear.trainer.eartrainerbackend.security;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class FilterConfig {
@@ -21,8 +22,8 @@ public class FilterConfig {
     }
 
     @Bean
-    public JwtFilter jwtFilter() {
-        return new JwtFilter();
+    public JwtFilter jwtFilter(RestTemplate restTemplate) {
+        return new JwtFilter(restTemplate);
     }
 
     @Bean

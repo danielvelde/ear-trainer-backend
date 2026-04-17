@@ -21,7 +21,11 @@ public class JwtFilter extends OncePerRequestFilter {
     @Value("${supabase.key}")
     private String apiKey;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
+
+    public JwtFilter(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

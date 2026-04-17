@@ -14,7 +14,7 @@ import java.util.Map;
 @Service
 public class SupabaseAuthClient {
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
 
     @Value("${supabase.url}")
     private String supabaseUrl;
@@ -24,6 +24,10 @@ public class SupabaseAuthClient {
 
     @Value("${supabase.service-role-key}")
     private String serviceRoleKey;
+
+    public SupabaseAuthClient(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public AuthResponseDto register(RegisterRequestDto dto) {
 
