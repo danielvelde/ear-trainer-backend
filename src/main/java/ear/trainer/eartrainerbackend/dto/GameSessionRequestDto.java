@@ -5,14 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.UUID;
+
 @Getter
 @Setter
-public class GameSessionDto {
+public class GameSessionRequestDto {
     private Long id;
+    private UUID userId;
     private int mode;
     private int amountOfQuestions;
-    private int score;
-    private int accuracy;
-    private int averageTimeInMs;
-    private Timestamp createdAt;
+
 }

@@ -1,7 +1,11 @@
 package ear.trainer.eartrainerbackend.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class AuthResponseDto {
     @JsonProperty("access_token")
     private String accessToken;
@@ -15,5 +19,7 @@ public class AuthResponseDto {
     @JsonProperty("expires_in")
     private Long expiresIn;
 
-    private UserResponseDto user;
+//    private UserResponseDto user;
+
+    private SupabaseUserDto user;
 }

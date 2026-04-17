@@ -13,10 +13,10 @@ import java.util.UUID;
 @Getter
 @Entity
 @Table(name = "users")
-public class User {
+public class User{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
 
     private String name;
@@ -24,12 +24,10 @@ public class User {
     @Email
     private String email;
 
-    private String passwordHash;
 
     private int defaultDifficulty; // 0 = single notes, 1 = simple chords
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
-
     private Timestamp createdAt;
 }

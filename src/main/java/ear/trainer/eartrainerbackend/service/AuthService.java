@@ -1,6 +1,7 @@
 package ear.trainer.eartrainerbackend.service;
 
 import ear.trainer.eartrainerbackend.client.SupabaseAuthClient;
+import ear.trainer.eartrainerbackend.database.entity.User;
 import ear.trainer.eartrainerbackend.database.repository.UserRepository;
 import ear.trainer.eartrainerbackend.dto.AuthResponseDto;
 import ear.trainer.eartrainerbackend.dto.LoginRequestDto;
@@ -9,6 +10,8 @@ import ear.trainer.eartrainerbackend.exception.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class AuthService {
 
@@ -16,11 +19,34 @@ public class AuthService {
     private UserService userService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private SupabaseAuthClient supabaseAuthClient;
 
     public AuthResponseDto register(RegisterRequestDto dto) {
-        try{
-            return supabaseAuthClient.register(dto);
+        try {
+            AuthResponseDto response = supabaseAuthClient.register(dto);
+
+            String userId = response.getUser().getId();
+            String email = response.getUser().getEmail();
+
+            User user = new User();
+            user.setId(UUID.fromString(userId));
+            user.setEmail(email);
+
+            try {
+                userRepository.save(user);
+            } catch (Exception e) {
+                // 1. Ruim Supabase op
+                supabaseAuthClient.undoRegister(userId);
+
+                // 2. Vertel de rest van de app dat het echt mislukt is
+                throw new RuntimeException("Database synchronisatie mislukt. Registratie is ongedaan gemaakt.", e);
+            }
+
+            return response;
+
         } catch (Exception e) {
             throw new RuntimeException("Registration failed: " + e.getMessage());
         }
