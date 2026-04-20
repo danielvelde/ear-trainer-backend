@@ -23,7 +23,7 @@ public class GameSessionController {
 
     @GetMapping("/session")
     public ResponseEntity<GameSessionResponseDto> getSession(GameSessionRequestDto dto) {
-        return ResponseEntity.ok(gameSessionService.generateSession(dto));
+        return ResponseEntity.ok(gameSessionService.createGameSession(dto));
     }
 
 //    @PutMapping // I think this could be used for actually storing the score after the game is finished

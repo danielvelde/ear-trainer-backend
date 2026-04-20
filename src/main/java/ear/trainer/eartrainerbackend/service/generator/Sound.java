@@ -1,8 +1,11 @@
 package ear.trainer.eartrainerbackend.service.generator;
 
 
+import lombok.Getter;
+
 import java.util.concurrent.ThreadLocalRandom;
 
+@Getter
 public class Sound {
     // private int octave; maybe later implement
     private RootNote rootNote;

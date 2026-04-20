@@ -13,7 +13,7 @@ import java.util.UUID;
 @Setter
 public class GameSessionResponseDto {
         private Long id;
-        private UUID userId;
+//        private UUID userId;
         private int mode;
         private int amountOfQuestions;
         private List<Sound> sounds;
