@@ -28,7 +28,7 @@ public class GameSessionMapper {
     public GameSessionResponseDto toResponseDto(GameSession gameSession){
         GameSessionResponseDto dto = new GameSessionResponseDto();
         dto.setId(gameSession.getId());
-        dto.setUserId(gameSession.getUser().getId());
+//        dto.setUserId(gameSession.getUser().getId());
         dto.setSounds(gameSession.getSounds());
         return dto;
     }

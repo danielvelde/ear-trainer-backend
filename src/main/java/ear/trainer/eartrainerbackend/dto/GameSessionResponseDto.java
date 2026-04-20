@@ -12,8 +12,8 @@ import java.util.UUID;
 @Getter
 @Setter
 public class GameSessionResponseDto {
-        private User user;
-        private UUID userId;
+        private Long id;
+//        private UUID userId;
         private int mode;
         private int amountOfQuestions;
         private List<Sound> sounds;
