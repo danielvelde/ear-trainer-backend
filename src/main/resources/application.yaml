@@ -29,8 +29,3 @@ supabase:
   service-role-key: ${SUPABASE_SECRET_KEY}
 cors:
   allowed-origins: ${CORS_ALLOWED_ORIGINS}
-freesound:
-  client-id: ${FREESOUND_CLIENT_ID}
-  api-key: ${FREESOUND_API_KEY}
-  pack-id: 45520
-  cache-dir: ${user.home}/.eartrainer/freesound-cache
