@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/audio")
-public class FreesoundController {
+public class AudioController {
 
     @Autowired
     private FreesoundService freesoundService;

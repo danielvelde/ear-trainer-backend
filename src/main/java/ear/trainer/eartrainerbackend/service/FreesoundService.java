@@ -15,7 +15,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @Service
@@ -29,25 +28,27 @@ public class FreesoundService {
     @Value("${freesound.pack-id}")
     private String packId;
 
-    @Value("${freesound.cache-dir}")
-    private String cacheDir;
+//    @Value("${freesound.cache-dir}")
+//    private String cacheDir;
 
     @Autowired
     private RestTemplate restTemplate;
 
-    private final Map<String, FreesoundSoundApiDto> soundMetadata = new ConcurrentHashMap<>();
+    @Autowired private Free
+
+//    private final Map<String, FreesoundSoundApiDto> soundMetadata = new ConcurrentHashMap<>();
 
     @PostConstruct
-    public void initCache() {
+    public void syncPack() {
         try {
-            Files.createDirectories(Path.of(cacheDir));
-            fetchAndCachePackSounds();
+//            Files.createDirectories(Path.of(cacheDir));
+            fetchAndPersistPackSounds();
         } catch (Exception e) {
-            log.error("Failed to initialize Freesound cache", e);
+            log.error("Failed to sync Freesound pack", e);
         }
     }
 
-    private void fetchAndCachePackSounds() {
+    private void fetchAndPersistPackSounds() {
         String url = FREESOUND_API_BASE + "/packs/" + packId + "/sounds/"
                 + "?token=" + apiKey + "&fields=id,name,previews&page_size=150";
 
@@ -56,9 +57,9 @@ public class FreesoundService {
             if (response == null || response.getResults() == null) break;
 
             for (FreesoundSoundApiDto sound : response.getResults()) {
-                String id = String.valueOf(sound.getId());
-                soundMetadata.put(id, sound);
-                downloadIfNotCached(sound);
+//                String id = String.valueOf(sound.getId());
+//                soundMetadata.put(id, sound);
+                persistIfMissing(sound);
             }
 
             String next = response.getNext();
@@ -68,10 +69,10 @@ public class FreesoundService {
             url = next;
         }
 
-        log.info("Freesound cache initialized: {} sounds available", soundMetadata.size());
+        log.info("Freesound cache initialized: {} sounds available", repository.count());
     }
 
-    private void downloadIfNotCached(FreesoundSoundApiDto sound) {
+    private void persistIfMissing(FreesoundSoundApiDto sound) {
         Path filePath = Path.of(cacheDir, sound.getId() + ".mp3");
         if (Files.exists(filePath)) return;
 
