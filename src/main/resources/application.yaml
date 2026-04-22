@@ -10,7 +10,7 @@ spring:
       idle-timeout: 120000
       leak-detection-threshold: 40001
       data-source-properties:
-        preparethreshold: 0
+        prepareThreshold: 0
 
   jpa:
     hibernate:
