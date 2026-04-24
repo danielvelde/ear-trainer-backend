@@ -1,7 +1,7 @@
 package ear.trainer.eartrainerbackend;
 
 import ear.trainer.eartrainerbackend.service.generator.GameContentGenerator;
-import ear.trainer.eartrainerbackend.service.generator.Sound;
+import ear.trainer.eartrainerbackend.model.Sound;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

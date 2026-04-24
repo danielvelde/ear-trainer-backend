@@ -1,6 +1,6 @@
 package ear.trainer.eartrainerbackend.database.entity;
 
-import ear.trainer.eartrainerbackend.service.generator.Sound;
+import ear.trainer.eartrainerbackend.model.Sound;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -2,10 +2,12 @@ package ear.trainer.eartrainerbackend.service;
 
 import ear.trainer.eartrainerbackend.database.entity.GameSession;
 import ear.trainer.eartrainerbackend.database.entity.User;
+import ear.trainer.eartrainerbackend.database.repository.GameSessionRepository;
 import ear.trainer.eartrainerbackend.dto.GameSessionRequestDto;
 import ear.trainer.eartrainerbackend.dto.GameSessionResponseDto;
+import ear.trainer.eartrainerbackend.dto.UserDto;
+import ear.trainer.eartrainerbackend.model.Sound;
 import ear.trainer.eartrainerbackend.service.generator.GameContentGenerator;
-import ear.trainer.eartrainerbackend.service.generator.Sound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class GameSessionService {
     private GameContentGenerator gameContentGenerator;
     private List<Sound> sounds;
 
+    @Autowired
+    private GameSessionRepository gameSessionRepository;
+
     public GameSessionResponseDto createGameSession(GameSessionRequestDto dto) {
         GameSessionResponseDto responseDto = new GameSessionResponseDto();
 //        responseDto.setUserId(dto.getUserId());
@@ -29,13 +34,27 @@ public class GameSessionService {
         return responseDto;
     }
 
-    public ArrayList<GameSessionResponseDto> getLatestSessions() {
-        ArrayList<GameSessionResponseDto> latestSessions = new ArrayList<>();
-        return latestSessions;
+    public List<GameSession> getLatestSessions(UserDto dto) {
+        return gameSessionRepository.findTop5ByUserIdOrderByCreatedAtDesc(dto.getId());
     }
 
-    public Map<Sound, boolean[]> getScorePerNote() {
+    public Map<Sound, boolean[]> getScorePerNote(UserDto dto) {
         Map<Sound, boolean[]> scorePerNote = new HashMap<>();
+
+        List<GameSession> latestSessions = gameSessionRepository.findTop5ByUserIdOrderByCreatedAtDesc(dto.getId());
+
+        // uit elke sessie de lists met sounds halen, per sessie de list met sounds toevoegen aan de scorepernote t
+        for (int i = 0; i < latestSessions.size(); i++) {
+            List<Sound> sounds = latestSessions.get(i).getSounds();
+
+
+        }
+
+
+
+//        for (Sound sound : latestSessions.get(i).getSounds) {
+
+//        }
         return scorePerNote;
     }
 

@@ -1,4 +1,4 @@
-package ear.trainer.eartrainerbackend.service.generator;
+package ear.trainer.eartrainerbackend.model;
 
 public enum ChordType {
     SINGLENOTE,

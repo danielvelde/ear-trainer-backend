@@ -1,6 +1,6 @@
 package ear.trainer.eartrainerbackend.dto;
 
-import ear.trainer.eartrainerbackend.service.generator.Sound;
+import ear.trainer.eartrainerbackend.model.Sound;
 import lombok.Getter;
 import lombok.Setter;
 
