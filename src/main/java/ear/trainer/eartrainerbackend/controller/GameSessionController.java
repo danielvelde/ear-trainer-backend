@@ -26,6 +26,11 @@ public class GameSessionController {
         return ResponseEntity.ok(gameSessionService.createGameSession(dto));
     }
 
+    @GetMapping("/latestsessions")
+    public ResponseEntity<?> getLatestSessions() {
+        return ResponseEntity.ok(gameSessionService.getLatestSessions());
+    }
+
 //    @PutMapping // I think this could be used for actually storing the score after the game is finished
 
 //    @DeleteMapping // Maybe for when person delet account

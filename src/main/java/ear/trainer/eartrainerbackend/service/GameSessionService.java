@@ -9,7 +9,10 @@ import ear.trainer.eartrainerbackend.service.generator.Sound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GameSessionService {
@@ -25,5 +28,16 @@ public class GameSessionService {
         responseDto.setSounds(gameContentGenerator.generateGameContent(dto.getMode(), dto.getAmountOfQuestions()));
         return responseDto;
     }
+
+    public ArrayList<GameSessionResponseDto> getLatestSessions() {
+        ArrayList<GameSessionResponseDto> latestSessions = new ArrayList<>();
+        return latestSessions;
+    }
+
+    public Map<Sound, boolean[]> getScorePerNote() {
+        Map<Sound, boolean[]> scorePerNote = new HashMap<>();
+        return scorePerNote;
+    }
+
 
 }

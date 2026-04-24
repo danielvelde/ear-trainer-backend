@@ -1,5 +1,7 @@
 # Ignore output folder
 /target/
+/.idea/
 HELP.md
 .env
 CLAUDE.md
+
