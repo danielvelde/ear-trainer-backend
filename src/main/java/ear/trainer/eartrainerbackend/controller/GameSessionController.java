@@ -1,11 +1,12 @@
 package ear.trainer.eartrainerbackend.controller;
 
-import ear.trainer.eartrainerbackend.database.entity.GameSession;
 import ear.trainer.eartrainerbackend.dto.GameSessionRequestDto;
 import ear.trainer.eartrainerbackend.dto.GameSessionResponseDto;
+import ear.trainer.eartrainerbackend.dto.GameSessionUpdateDto;
+import ear.trainer.eartrainerbackend.dto.UserDto;
+import ear.trainer.eartrainerbackend.security.JwtFilter;
 import ear.trainer.eartrainerbackend.service.GameSessionService;
-import org.springframework.security.core.Authentication;
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,16 +23,33 @@ public class GameSessionController {
 
 
     @GetMapping("/session")
-    public ResponseEntity<GameSessionResponseDto> getSession(GameSessionRequestDto dto) {
+    public ResponseEntity<GameSessionResponseDto> getSession(GameSessionRequestDto dto, HttpServletRequest request) {
+        UUID userId = (UUID) request.getAttribute(JwtFilter.USER_ID_ATTR);
+        if (userId == null) {
+            return ResponseEntity.status(401).build();
+        }
+        dto.setUserId(userId);
         return ResponseEntity.ok(gameSessionService.createGameSession(dto));
     }
 
-    @GetMapping("/latestsessions")
-    public ResponseEntity<?> getLatestSessions() {
-        return ResponseEntity.ok(gameSessionService.getLatestSessions());
+    // Deze is misschien overbodig?
+    @GetMapping("/getscores")
+    public ResponseEntity<?> getScorePerNote(HttpServletRequest request) {
+        UUID userId = (UUID) request.getAttribute(JwtFilter.USER_ID_ATTR);
+        if (userId == null) {
+            return ResponseEntity.status(401).build();
+        }
+        UserDto dto = new UserDto();
+        dto.setId(userId);
+        return ResponseEntity.ok(gameSessionService.getScorePerNote(dto));
     }
 
-//    @PutMapping // I think this could be used for actually storing the score after the game is finished
+//    @GetMapping("/getlatest")
+
+    @PutMapping("/session")
+    public ResponseEntity<?> updateSession(@RequestBody GameSessionUpdateDto dto) {
+        return ResponseEntity.ok(gameSessionService.updateGameSession(dto));
+    }
 
 //    @DeleteMapping // Maybe for when person delet account
 

@@ -1,6 +1,6 @@
 package ear.trainer.eartrainerbackend.database.entity;
 
-import ear.trainer.eartrainerbackend.service.generator.Sound;
+import ear.trainer.eartrainerbackend.model.Sound;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +27,8 @@ public class GameSession {
 
     private int amountOfQuestions;
 
+    @Convert(converter = SoundListConverter.class)
+    @Column(columnDefinition = "text")
     private ArrayList<Sound> sounds;
 
     private int score; // 100 = max

@@ -8,18 +8,27 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.UUID;
 
 public class JwtFilter extends OncePerRequestFilter {
+
+    public static final String USER_ID_ATTR = "authenticatedUserId";
+    public static final String USER_EMAIL_ATTR = "authenticatedUserEmail";
 
     @Value("${supabase.url}")
     private String supabaseUrl;
 
     @Value("${supabase.key}")
     private String apiKey;
+
+    @Value("${ANALYZER_INTERNAL_TOKEN}")
+    private String internalToken;
 
     private final RestTemplate restTemplate;
 
@@ -55,6 +64,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String token = authHeader.substring(7);
 
+        if (token.equals(internalToken)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         try {
             // Call Supabase to validate token
             String url = supabaseUrl + "/auth/v1/user";
@@ -65,7 +79,17 @@ public class JwtFilter extends OncePerRequestFilter {
 
             HttpEntity<Void> entity = new HttpEntity<>(headers);
 
-            restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+            ResponseEntity<Map> userResponse = restTemplate.exchange(url, HttpMethod.GET, entity, Map.class);
+            Map<?, ?> body = userResponse.getBody();
+            if (body == null || body.get("id") == null) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write("Could not resolve user from token.");
+                return;
+            }
+            request.setAttribute(USER_ID_ATTR, UUID.fromString(body.get("id").toString()));
+            if (body.get("email") != null) {
+                request.setAttribute(USER_EMAIL_ATTR, body.get("email").toString());
+            }
 
             // valid → continue
             filterChain.doFilter(request, response);

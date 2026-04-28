@@ -40,3 +40,6 @@ freesound:
   client-id: ${FREESOUND_CLIENT_ID}
   api-key: ${FREESOUND_API_KEY}
   pack-id: ${FREESOUND_PACK_ID}
+analyzer:
+  internal-token: ${ANALYZER_INTERNAL_TOKEN}
+  url: ${ANALYZER_URL}

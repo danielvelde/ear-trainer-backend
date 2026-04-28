@@ -1,4 +1,4 @@
-package ear.trainer.eartrainerbackend.service.generator;
+package ear.trainer.eartrainerbackend.model;
 // 's' stands for #, so Cs, Ds etc are C#, D# etc
 public enum RootNote{
     C,
