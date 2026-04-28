@@ -14,11 +14,19 @@ public class BooleanCounter {
         trueCount = 0;
     }
 
-    public void incrementTrue() {
+    public void increment(boolean value) {
+        if (value) {
+            incrementTrue();
+        } else {
+            incrementFalse();
+        }
+    }
+
+    private void incrementTrue() {
         trueCount++;
     }
 
-    public void incrementFalse() {
+    private void incrementFalse() {
         falseCount++;
     }
 

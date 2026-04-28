@@ -1,18 +1,28 @@
 package ear.trainer.eartrainerbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
+@Setter
 @Getter
-public class Sound {
-    // private int octave; maybe later implement
-    private final RootNote rootNote;
-    private final ChordType chordType;
+public class Sound implements Serializable {
 
-    @Setter
-    private boolean isCorrect;
+    private static final long serialVersionUID = 1L;
+    private RootNote rootNote;
+    private ChordType chordType;
+    private boolean correct;
 
-    public Sound(RootNote rootNote, ChordType chordType) {
+    public Sound() {}
+
+    @JsonCreator
+    public Sound(
+            @JsonProperty("rootNote") RootNote rootNote,
+            @JsonProperty("chordType") ChordType chordType
+    ) {
         this.rootNote = rootNote;
         this.chordType = chordType;
     }

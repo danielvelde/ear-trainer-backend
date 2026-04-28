@@ -27,6 +27,8 @@ public class GameSession {
 
     private int amountOfQuestions;
 
+    @Convert(converter = SoundListConverter.class)
+    @Column(columnDefinition = "text")
     private ArrayList<Sound> sounds;
 
     private int score; // 100 = max
