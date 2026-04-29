@@ -15,12 +15,7 @@ public class AnalyzerService {
     private GameSessionService gameSessionService;
 
     public AnalyzerResponseDto analyze(UserDto dto) {
-
-
-        AnalyzerResponseDto resDto = analyzerClient.analyze(gameSessionService.getScorePerNote(dto));
-
-//        analyzerDto.setText();
-        return resDto;
+        return analyzerClient.analyze(gameSessionService.getScorePerNote(dto));
     }
 
 }

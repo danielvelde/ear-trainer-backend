@@ -6,7 +6,6 @@ import ear.trainer.eartrainerbackend.database.repository.UserRepository;
 import ear.trainer.eartrainerbackend.dto.AuthResponseDto;
 import ear.trainer.eartrainerbackend.dto.LoginRequestDto;
 import ear.trainer.eartrainerbackend.dto.RegisterRequestDto;
-import ear.trainer.eartrainerbackend.exception.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -43,15 +43,10 @@ public class GameSessionController {
         dto.setId(userId);
         return ResponseEntity.ok(gameSessionService.getScorePerNote(dto));
     }
-
-//    @GetMapping("/getlatest")
-
     @PutMapping("/session")
     public ResponseEntity<?> updateSession(@RequestBody GameSessionUpdateDto dto) {
         return ResponseEntity.ok(gameSessionService.updateGameSession(dto));
     }
-
-//    @DeleteMapping // Maybe for when person delet account
-
-    // TODO
 }
+
+
