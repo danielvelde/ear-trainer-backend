@@ -39,12 +39,10 @@ public class FreesoundService {
     @Autowired private RestTemplate restTemplate;
     @Autowired private S3Client s3;
     @Autowired private FreesoundSoundRepository repository;
-//    private final Map<String, FreesoundSoundApiDto> soundMetadata = new ConcurrentHashMap<>();
 
     @EventListener(ApplicationReadyEvent.class)
     public void onApplicationReady() {
         try {
-//            Files.createDirectories(Path.of(cacheDir));
             fetchAndUploadPackSounds();
         } catch (Exception e) {
             log.error("Failed to sync Freesound pack", e);
@@ -60,8 +58,6 @@ public class FreesoundService {
             if (response == null || response.getResults() == null) break;
 
             for (FreesoundSoundApiDto sound : response.getResults()) {
-//                String id = String.valueOf(sound.getId());
-//                soundMetadata.put(id, sound);
                 uploadIfMissing(sound);
             }
 
