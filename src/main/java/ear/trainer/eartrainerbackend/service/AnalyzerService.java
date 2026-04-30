@@ -11,11 +11,8 @@ public class AnalyzerService {
     @Autowired
     private AnalyzerClient analyzerClient;
 
-    @Autowired
-    private GameSessionService gameSessionService;
-
     public AnalyzerResponseDto analyze(UserDto dto) {
-        return analyzerClient.analyze(gameSessionService.getScorePerNote(dto));
+        return analyzerClient.analyze(dto);
     }
 
 }
