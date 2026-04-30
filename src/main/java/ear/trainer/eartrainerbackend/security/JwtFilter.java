@@ -49,7 +49,13 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String path = request.getRequestURI();
 
-        if (path.startsWith("/api/auth") || path.startsWith("/api/freesound") || path.startsWith("/api/audio") || path.startsWith("/api/stats")) {
+        if (path.startsWith("/api/auth") || path.startsWith("/api/freesound") || path.startsWith("/api/audio")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String internalHeader = request.getHeader("X-Internal-Token");
+        if (internalHeader != null && internalHeader.equals(internalToken)) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -63,11 +69,6 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         String token = authHeader.substring(7);
-
-        if (token.equals(internalToken)) {
-            filterChain.doFilter(request, response);
-            return;
-        }
 
         try {
             // Call Supabase to validate token
