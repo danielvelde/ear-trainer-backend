@@ -54,6 +54,10 @@ public class GameSessionService {
         return gameSessionRepository.findTop5ByUserIdOrderByCreatedAtDesc(dto.getId());
     }
 
+    public List<GameSession> getLatestTenSessions(UserDto dto) {
+        return gameSessionRepository.findTop10ByUserIdOrderByCreatedAtDesc(dto.getId());
+    }
+
     public Map<RootNote, BooleanCounter> getScorePerNote(UserDto dto) {
         Map<RootNote, BooleanCounter> scorePerNote = new HashMap<>();
         List<GameSession> latestSessions = getLatestSessions(dto);

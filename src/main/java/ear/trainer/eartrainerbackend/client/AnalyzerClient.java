@@ -1,9 +1,7 @@
 package ear.trainer.eartrainerbackend.client;
 
-import ear.trainer.eartrainerbackend.dto.AnalyzerRequestDto;
 import ear.trainer.eartrainerbackend.dto.AnalyzerResponseDto;
-import ear.trainer.eartrainerbackend.model.BooleanCounter;
-import ear.trainer.eartrainerbackend.model.RootNote;
+import ear.trainer.eartrainerbackend.dto.UserDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -27,13 +25,11 @@ public class AnalyzerClient {
         this.restTemplate = restTemplate;
     }
 
-    public AnalyzerResponseDto analyze(Map<RootNote, BooleanCounter> scorePerNote) {
-        AnalyzerRequestDto reqDto = new AnalyzerRequestDto();
-        reqDto.setScorePerNote(scorePerNote);
-        return getLlmResults(reqDto);
+    public AnalyzerResponseDto analyze(UserDto userDto) {
+        return getLlmResults(userDto);
     }
 
-    public AnalyzerResponseDto getLlmResults(AnalyzerRequestDto reqDto){
+    public AnalyzerResponseDto getLlmResults(UserDto userDto){
         AnalyzerResponseDto resDto = new AnalyzerResponseDto();
         String url = analyzerUrl + "/analyze";
 
@@ -42,8 +38,7 @@ public class AnalyzerClient {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         Map<String, String> body = new HashMap<>();
-        body.put("scores", reqDto.getScorePerNote().toString());
-
+        body.put("userId", userDto.getId().toString());
 
         HttpEntity<Map<String, String>> request = new HttpEntity<>(body, headers);
 

@@ -54,6 +54,12 @@ public class JwtFilter extends OncePerRequestFilter {
             return;
         }
 
+        String internalHeader = request.getHeader("X-Internal-Token");
+        if (internalHeader != null && internalHeader.equals(internalToken)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -63,11 +69,6 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         String token = authHeader.substring(7);
-
-        if (token.equals(internalToken)) {
-            filterChain.doFilter(request, response);
-            return;
-        }
 
         try {
             // Call Supabase to validate token

@@ -1,0 +1,43 @@
+package ear.trainer.eartrainerbackend.controller;
+
+import ear.trainer.eartrainerbackend.dto.SessionHistoryDto;
+import ear.trainer.eartrainerbackend.dto.StatsWorstDto;
+import ear.trainer.eartrainerbackend.dto.UserDto;
+import ear.trainer.eartrainerbackend.security.JwtFilter;
+import ear.trainer.eartrainerbackend.service.StatsService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.UUID;
+
+@RestController
+@RequestMapping("api/stats")
+public class StatsController {
+
+    @Autowired
+    private StatsService statsService;
+
+    @GetMapping("/worstnote")
+    public ResponseEntity<StatsWorstDto> getWorstNote(@RequestParam UUID userId){
+        UserDto dto = new UserDto();
+        dto.setId(userId);
+        return ResponseEntity.ok(statsService.getWorstNote(dto));
+    }
+
+    @GetMapping("/history")
+    public ResponseEntity<List<SessionHistoryDto>> getSessionHistory(HttpServletRequest request) {
+        UUID userId = (UUID) request.getAttribute(JwtFilter.USER_ID_ATTR);
+        if (userId == null) {
+            return ResponseEntity.status(401).build();
+        }
+        UserDto dto = new UserDto();
+        dto.setId(userId);
+        return ResponseEntity.ok(statsService.getSessionHistory(dto));
+    }
+}
