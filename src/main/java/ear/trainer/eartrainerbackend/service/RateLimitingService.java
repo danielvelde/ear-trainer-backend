@@ -3,11 +3,10 @@ package ear.trainer.eartrainerbackend.service;
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
 import io.github.bucket4j.Refill;
-import org.springframework.stereotype.Service;
-
 import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.stereotype.Service;
 
 @Service
 public class RateLimitingService {
@@ -22,7 +21,12 @@ public class RateLimitingService {
     private Bucket newBucket(String ip) {
         // Configuratie: 10 verzoeken per minuut
         return Bucket.builder()
-                .addLimit(Bandwidth.classic(10, Refill.intervally(10, Duration.ofMinutes(1))))
-                .build();
+            .addLimit(
+                Bandwidth.classic(
+                    10,
+                    Refill.intervally(10, Duration.ofMinutes(1))
+                )
+            )
+            .build();
     }
 }
