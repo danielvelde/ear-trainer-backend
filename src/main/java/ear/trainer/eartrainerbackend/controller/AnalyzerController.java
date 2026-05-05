@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/analyzer")
+@RequestMapping("/api/analyzer")
 public class AnalyzerController {
     @Autowired
     private AnalyzerService analyzerService;
 
 
 
-    @GetMapping("/getanalytics") // frontend roept deze aan
+    @GetMapping("/analytics")
     public ResponseEntity<AnalyzerResponseDto> analyze(HttpServletRequest request) {
         UUID userId = (UUID) request.getAttribute(JwtFilter.USER_ID_ATTR);
         if (userId == null) {
