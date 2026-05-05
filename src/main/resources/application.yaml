@@ -43,3 +43,5 @@ freesound:
 analyzer:
   internal-token: ${ANALYZER_INTERNAL_TOKEN}
   url: ${ANALYZER_URL}
+logger:
+  url: ${LOGGER_URL}

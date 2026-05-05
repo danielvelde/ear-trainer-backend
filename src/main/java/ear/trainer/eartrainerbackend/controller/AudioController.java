@@ -26,13 +26,14 @@ public class AudioController {
         return ResponseEntity.ok(freesoundService.getAvailableSounds());
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<byte[]> getSound(@PathVariable String id) throws IOException {
         byte[] audioBytes = freesoundService.getAudioBytes(id);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("audio/mpeg"))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + id + ".mp3\"")
+                .header(HttpHeaders.CACHE_CONTROL, "public, max-age=2592000, immutable")
                 .body(audioBytes);
     }
 }

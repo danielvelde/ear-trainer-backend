@@ -2,6 +2,7 @@ package ear.trainer.eartrainerbackend.client;
 
 import ear.trainer.eartrainerbackend.dto.AnalyzerResponseDto;
 import ear.trainer.eartrainerbackend.dto.UserDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,9 @@ import java.util.Map;
 
 @Service
 public class AnalyzerClient {
+
+    @Autowired
+    private LoggingClient loggingClient;
 
     @Value("${analyzer.url}")
     private String analyzerUrl;
@@ -39,6 +43,8 @@ public class AnalyzerClient {
 
         Map<String, String> body = new HashMap<>();
         body.put("userId", userDto.getId().toString());
+
+        loggingClient.log("/analyze");
 
         HttpEntity<Map<String, String>> request = new HttpEntity<>(body, headers);
 
