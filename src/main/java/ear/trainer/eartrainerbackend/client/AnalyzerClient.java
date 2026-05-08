@@ -44,7 +44,12 @@ public class AnalyzerClient {
         Map<String, String> body = new HashMap<>();
         body.put("userId", userDto.getId().toString());
 
-        loggingClient.log("/analyze");
+        try {
+            loggingClient.log("/analyze");
+        } catch (java.io.IOException e) {
+            System.out.println("Sorry jongens lukt niet");
+        }
+
 
         HttpEntity<Map<String, String>> request = new HttpEntity<>(body, headers);
 
